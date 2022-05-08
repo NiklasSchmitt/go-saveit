@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"github.com/NiklasSchmitt/go-saveit"
 )
 
 func main() {
