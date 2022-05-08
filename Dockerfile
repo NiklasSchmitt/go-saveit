@@ -1,20 +1,9 @@
-FROM golang:1.18.1-buster AS builder
-#RUN mkdir /build
-RUN apt update && apt install -y unzip wget
+FROM golang:1.18.1-alpine AS builder
+RUN apk add --no-cache --upgrade bash && apk add unzip wget
+RUN wget https://github.com/NiklasSchmitt/go-saveit/archive/refs/heads/main.zip && unzip main.zip
+WORKDIR go-saveit-main
+RUN CGO_ENABLED=0 GOOS="linux" GOARCH="amd64" go build -ldflags="-w -s" -o /go-saveit
 
-RUN wget https://github.com/NiklasSchmitt/go-saveit/archive/refs/heads/main.zip && unzip main.zip -d /build
-WORKDIR /build
-RUN export CGO_ENABLED=0
-RUN cd /build/go-saveit-main/ && go build -o /build/go-saveit
-RUN ls -alh
-RUN ls -alh /
-
-FROM alpine
-#RUN mkdir /app
-#RUN adduser -S -D -H -h /app appuser
-#USER appuser
-#RUN ls -alh
-#ORKDIR /app
-COPY --from=builder /build/go-saveit /
-RUN ls -alh /
+FROM scratch
+COPY --from=builder /go-saveit /
 CMD ["./go-saveit"]
