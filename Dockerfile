@@ -7,6 +7,6 @@ WORKDIR /app
 ADD . /app
 
 # Build the Go app
-RUN go get -u github.com/NiklasSchmitt/go-saveit && go build -o app/gosaveit
+RUN go get -u github.com/NiklasSchmitt/go-saveit && go build -o app/go-saveit
 
-ENTRYPOINT ["/app/gosaveit"]
+ENTRYPOINT ["/app/go-saveit"]
