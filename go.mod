@@ -1,3 +1,3 @@
-module gosaveit/m/v2
+module gosaveit
 
 go 1.18
