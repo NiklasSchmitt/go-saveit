@@ -13,3 +13,6 @@ h1 {
 input[type=text]:focus {
 	border: 4px solid #0dcaf0;
 }
+.form-control:focus {
+	border: 4px solid #0dcaf0;
+}
